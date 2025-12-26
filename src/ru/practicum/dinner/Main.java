@@ -14,18 +14,20 @@ public class Main {
 
         while (true) {
             printMenu();
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim(); // методы String мы еще не проходили, но буду знать спс.
 
             switch (command) {
                 case "1":
                     addNewDish();
-                    System.out.println(dc.dinnersByType);
                     break;
                 case "2":
                     generateDishCombo();
                     break;
                 case "3":
                     return;
+                default:
+                    System.out.println("Такой команды нет!"); // Обработчик неверного ввода команды.
+                    break;
             }
         }
     }
@@ -39,9 +41,9 @@ public class Main {
 
     private static void addNewDish() {
         System.out.println("Введите тип блюда:");
-        String dishType = scanner.nextLine();
+        String dishType = scanner.nextLine().trim();
         System.out.println("Введите название блюда:");
-        String dishName = scanner.nextLine();
+        String dishName = scanner.nextLine().trim();
         dc.addNewDish(dishType, dishName);
     }
 
@@ -53,7 +55,7 @@ public class Main {
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-        String nextItem = scanner.nextLine();
+        String nextItem = scanner.nextLine().trim();
 
         //реализуйте ввод типов блюд
         ArrayList<String> selectedTypes = new ArrayList<>();
@@ -69,7 +71,7 @@ public class Main {
         // сгенерируйте комбинации блюд и выведите на экран
         ArrayList<ArrayList<String>> generatedCombos = dc.generateCombos(numberOfCombos, selectedTypes); //сгенерируйте варианты комбинаций блюд с помощью метода DinnerConstructor generateCombos
         for (int i = 0; i < numberOfCombos; i++) {
-            System.out.println("Комбинация " + (i +1));
+            System.out.println("Комбинация " + (i + 1));
             System.out.println(generatedCombos.get(i)); //выведите каждый элемент получившейся комбинации
         }
     }
